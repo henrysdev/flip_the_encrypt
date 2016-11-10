@@ -1,11 +1,10 @@
-
 <html>
   <style>
   p{padding:0;margin:0;font-family:"Times New Roman", serif;
   letter-spacing: 1px;background-color:#f1f1f1;margin-bottom:5px;margin-top:5px;}
   legend{margin-top:10px;border:1px solid #444;padding:5px;margin-bottom:15px;background-color:#f1f1f1;}
   fieldset{width:300px;margin-left:20px;border:1px solid #444;padding:5px;}
-  h2 {text-align: center;};
+  h2 {text-align: center; margin-bottom: 1px;};
   </style>
 
     <header>
@@ -51,8 +50,9 @@
     echo "0 results";
   }
   $conn->close();
-
+  $count = strlen($cipher_to_display);
   echo '<div><h2>' . htmlspecialchars($cipher_to_display) . '</h2></div>'."\n";
+  echo '<div style="text-align:center;">(' . $count . ' chars)</div>'."\n";
   echo '<div>by: <i>' . htmlspecialchars($alias_to_display) . '</i></div>'."\n";
   echo '<div> attempted <strong>' . htmlspecialchars($attempts_to_display) . '</strong> times</div>'."\n";
 ?>
@@ -60,7 +60,7 @@
   </div>
 <form action="attempt.php" method="POST">
 <fieldset>
-<p>Your Attempt</p><textarea name="attempt" rows="4" cols="29"></textarea><br />
+<p>Your Attempt</p><textarea maxlength="20" name="attempt" rows="4" cols="29"></textarea><br />
 
 <br />
 

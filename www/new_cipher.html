@@ -16,7 +16,7 @@ fieldset{width:300px;margin-left:20px;border:1px solid #444;padding:5px;}
 <form action="create_cipher.php" method="POST">
 <fieldset>
 <legend>Enter New Message</legend>
-<p>Message</p><textarea name="message" rows="8" cols="29"></textarea><br />
+<p>Message</p><textarea maxlength="20" name="message" rows="8" cols="29"></textarea><br />
 <p>Alias</p> <input type="text" name="alias">
 </fieldset>
 <br />
@@ -58,7 +58,7 @@ No:<input type="checkbox" value="No" name="call"><br />
 <p>Message</p><textarea name="message" rows="8" cols="29"></textarea><br />
 -->
 <fieldset>
-<input type="submit" value="Send"><input type="reset" value="Clear">
+<input type="submit" value="Encrypt"> <!--<input type="reset" value="Clear">-->
 </fieldset>
 </form>
 
