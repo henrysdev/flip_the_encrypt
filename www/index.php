@@ -17,7 +17,6 @@
     <legend>Crack the Code to Change it!</legend>
     <title>Flip the Encrypt</title>
     <strong name="current_cipher"></strong>
-
 <?php
   //sql server
   $db_servername = "localhost";

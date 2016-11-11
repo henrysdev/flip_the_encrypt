@@ -1,21 +1,4 @@
 <?php
-/*
-$name = $_POST['name'];
-$email = $_POST['email'];
-$phone = $_POST['phone'];
-$call = $_POST['call'];
-$website = $_POST['website'];
-$priority = $_POST['priority'];
-$type = $_POST['type'];
-$message = $_POST['message'];
-$formcontent=" From: $name \n Phone: $phone \n Call Back: $call \n Website: $website \n Priority: $priority \n Type: $type \n Message: $message";
-$recipient = "YOUREMAIL@HERE.COM";
-$subject = "Contact Form";
-$mailheader = "From: $email \r\n";
-mail($recipient, $subject, $formcontent, $mailheader) or die("Error!");
-echo "Thank You!" . " -" . "<a href='form.html' style='text-decoration:none;color:#ff0099;'> Return Home</a>";
-*/
-
 function scramble($msg, $orig_alphabet, $new_alphabet)
 {
     for($i = 0; $i < strlen($msg); $i++)
@@ -44,9 +27,9 @@ function cipher($message, $alias, $attempts, $age) {
         //echo "Connection failed: " . $conn->connect_error;
 //        $logger->error('Connection to database failed: ', $conn->connect_error);
     }
-    $message = strtolower($message);
+    # $orig_alphabet = "abcdefghijklmnopqrstuvwxyz";
     $orig_alphabet = "abcdefghijklmnopqrstuvwxyz";
-    $alphabet = str_shuffle($orig_alphabet);
+    $alphabet = str_shuffle("~!@#$%^&*+=-<>?:;][{}=|,()");
     $cipher = scramble($message, $orig_alphabet, $alphabet);
     // regex check input
     /*
@@ -81,12 +64,39 @@ function cipher($message, $alias, $attempts, $age) {
     $conn->close();
     return "Invalid input.";
 }
+
+function clean_message($msg)
+{
+    if(strlen($msg) <= 2)
+    {
+        #echo "must be at least 3 characters";
+        header('Location: new_cipher.html');
+        exit;
+    }
+    $msg = strtolower($msg);
+    $msg = rtrim(ltrim($msg));
+    return $msg;
+}
+
+function clean_alias($alias)
+{
+    if(strlen($alias) <= 1)
+    {
+        header('Location: new_cipher.html');
+        exit;
+    }
+    $alias = rtrim(ltrim($alias));
+    $alias = preg_replace('/\s+/', '', $alias);
+    return $alias;
+}
+
     $message = $_POST['message'];
     $alias = $_POST['alias'];
     $attempts = 0;#$_POST['attempts'];
     $age = 0;#$_POST['age'];
 
-    #include "add_cipher.php";
+    $message = clean_message($message);
+    $alias = clean_alias($alias);
 
     $status = cipher($message, $alias, $attempts, $age);
 
